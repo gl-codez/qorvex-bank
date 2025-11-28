@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "Qorvex Bank",
   description:
     "Qorvex bank is a modern banking application for all your financial needs.",
+  icons: {
+    icon: "/icons/logo.png",
+  },
 };
 
 export default function RootLayout({

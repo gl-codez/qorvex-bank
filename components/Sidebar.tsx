@@ -13,11 +13,11 @@ const Sidebar = ({ user }: SiderbarProps) => {
       <nav className="flex flex-col gap-4 px-4">
         <Link href="/" className="mb-4 flex cursor-pointer items-center gap-2">
           <Image
-            src="/icons/lo.png"
+            src="/icons/logo.png"
             alt="qorvex logo"
-            width={34}
-            height={34}
-            className="size-6 max-xl:size-14"
+            width={44}
+            height={44}
+            className="size-15 max-xl:size-14"
           />
           <h1 className="sidebar-logo">Qorvex</h1>
         </Link>

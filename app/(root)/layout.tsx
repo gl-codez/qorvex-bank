@@ -14,7 +14,7 @@ export default function RootLayout({
       <Sidebar user={loggedIn?.firstName} />
       <div className="size-full flex-col">
         <div className="root-layout shadow-creditCard">
-          <Image src="/icons/lo.png" alt="logo" width={30} height={30} />
+          <Image src="/icons/logo.png" alt="logo" width={50} height={50} />
           <div>
             <MobileNav user={loggedIn} />
           </div>

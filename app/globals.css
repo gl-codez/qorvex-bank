@@ -167,3 +167,31 @@
 .shadow-creditCard {
   box-shadow: 8px 10px 16px rgba(0, 0, 0, 0.05);
 }
+
+.auth-form {
+  @apply flex min-h-screen w-full max-w-[420px] flex-col justify-center gap-5 py-10 md:gap-8;
+}
+
+.form-item {
+  @apply flex flex-col gap-1.5;
+}
+
+.form-label {
+  @apply text-sm w-full max-w-[280px] font-medium text-gray-700;
+}
+
+.input-class {
+  @apply text-[16px] rounded-lg border border-gray-300 text-gray-900;
+}
+
+.form-message {
+  @apply text-xs text-red-500;
+}
+
+.form-btn {
+  @apply text-[16px] rounded-lg px-3 py-1 font-semibold text-white border border-[#0179FE];
+}
+
+.form-link {
+  @apply text-sm cursor-pointer font-medium;
+}

@@ -40,7 +40,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
             className="flex cursor-pointer items-center gap-1 px-4"
           >
             <Image
-              src="/icons/lo.png"
+              src="/icons/logo.png"
               alt="qorvex logo"
               width={34}
               height={34}
