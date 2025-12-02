@@ -15,6 +15,8 @@ export function formatAmount(amount: number): string {
 
   return formatter.format(amount);
 }
+export const parseStringify = <T>(value: T): T =>
+  JSON.parse(JSON.stringify(value));
 
 export const authFormSchema = (type: string) =>
   z.object({
@@ -37,7 +39,7 @@ export const authFormSchema = (type: string) =>
     state:
       type === "sign-in"
         ? z.string().optional()
-        : z.string().nonempty("Required").min(2).max(2),
+        : z.string().nonempty("Required").min(2).max(10),
     postalCode:
       type === "sign-in"
         ? z.string().optional()

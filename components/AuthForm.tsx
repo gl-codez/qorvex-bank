@@ -21,9 +21,11 @@ import { CustomInput } from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { signIn, signUp } from "@/lib/actions/user.action";
+import { Models } from "node-appwrite";
 
 const AuthForm = ({ type }: { type: string }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<Models.User | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -48,15 +50,15 @@ const AuthForm = ({ type }: { type: string }) => {
     setIsLoading(true);
     try {
       if (type === "sign-up") {
-        // const newUser = signUp(data)
-        // setUser(newUser)
+        const newUser = await signUp(data);
+        setUser(newUser);
       }
       if (type === "sign-in") {
-        // const response = await SignIn({
-        //   email: data.email,
-        //   password: data.password,
-        // });
-        // router.push("/");
+        const response = await signIn({
+          email: data.email,
+          password: data.password,
+        });
+        if (response) router.push("/");
       }
     } catch (error) {
       console.log(error);
@@ -150,7 +152,7 @@ const AuthForm = ({ type }: { type: string }) => {
                       control={form.control}
                       name="ssn"
                       label="SSN"
-                      placeholder=" YYYY-MM-DD"
+                      placeholder=" Example: 1234"
                     />
                   </div>
                 </>
@@ -191,7 +193,7 @@ const AuthForm = ({ type }: { type: string }) => {
                 : "Already have an account?"}
             </p>
             <Link
-              className="form-link text-[#0179FE]"
+              className="form-link text-[#0F9D58]"
               href={type === "sign-in" ? "/sign-up" : "/sign-in"}
             >
               {type == "sign-in" ? "Sign Up" : "Sign In"}

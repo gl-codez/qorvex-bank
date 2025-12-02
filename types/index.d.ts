@@ -27,6 +27,8 @@ declare type User = {
   postalCode: string;
   dateOfBirth: string;
   ssn: string;
+  $createdAt: string;
+  $updatedAt: string;
 };
 declare interface HeaderBoxProps {
   type?: "title" | "greeting";
@@ -46,15 +48,15 @@ declare interface DoughnutChartProps {
 }
 
 declare interface SiderbarProps {
-  user: User;
+  user: User | null;
 }
 
 declare interface MobileNavProps {
-  user: User;
+  user: User | null;
 }
 
 declare interface RightSidebarProps {
-  user: User;
+  user: Models.User | null;
   transactions: Transaction[];
   banks: Bank[] & Account[];
 }
@@ -63,4 +65,27 @@ declare interface CreditCardProps {
   account: Account;
   userName: string;
   showBalance?: boolean;
+}
+
+declare type SignUpParams = {
+  firstName?: string;
+  lastName?: string;
+  address1?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
+  dateOfBirth?: string;
+  ssn?: string;
+  email: string;
+  password: string;
+};
+
+declare interface signInProps {
+  email: string;
+  password: string;
+}
+
+declare interface FooterProps {
+  user: User | null;
+  type?: "mobile" | "desktop";
 }
