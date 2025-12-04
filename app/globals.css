@@ -215,3 +215,7 @@
 .auth-asset {
   @apply flex h-screen w-full sticky top-0 items-center justify-end bg-[#F3FFF7] max-lg:hidden;
 }
+
+.plaidlink-primary {
+  @apply text-[16px] rounded-lg font-semibold text-white border border-[#0F9D58];
+}

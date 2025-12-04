@@ -39,11 +39,11 @@ export const authFormSchema = (type: string) =>
     state:
       type === "sign-in"
         ? z.string().optional()
-        : z.string().nonempty("Required").min(2).max(10),
+        : z.string().nonempty("Required").min(2).max(2),
     postalCode:
       type === "sign-in"
         ? z.string().optional()
-        : z.string().nonempty("Required").min(3).max(6),
+        : z.string().nonempty("Required").min(5).max(10),
     dateOfBirth:
       type === "sign-in"
         ? z.string().optional()
@@ -51,7 +51,19 @@ export const authFormSchema = (type: string) =>
     ssn:
       type === "sign-in"
         ? z.string().optional()
-        : z.string().nonempty("Required").min(3),
+        : z.string().nonempty("Required").min(5),
     email: z.email(),
     password: z.string().nonempty("Required").min(8),
   });
+
+export function encryptId(id: string) {
+  return btoa(id);
+}
+
+export function extractCustomerIdFromUrl(url: string) {
+  const parts = url.split("/");
+
+  const customerId = parts[parts.length - 1];
+
+  return customerId;
+}
