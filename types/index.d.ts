@@ -4,9 +4,9 @@ declare type Account = {
   id: string;
   availableBalance: number;
   currentBalance: number;
-  officialName: string;
+  officialName: string | null;
   mask: string;
-  institutionId: string;
+  institutionId?: string;
   name: string;
   type: string;
   subtype: string;
@@ -15,7 +15,6 @@ declare type Account = {
 };
 
 declare type User = Models.Document & {
-  $id: string;
   email: string;
   userId: string;
   dwollaCustomerUrl: string;
@@ -29,9 +28,8 @@ declare type User = Models.Document & {
   postalCode: string;
   dateOfBirth: string;
   ssn: string;
-  $createdAt: string;
-  $updatedAt: string;
 };
+
 declare interface HeaderBoxProps {
   type?: "title" | "greeting";
   title: string;
@@ -59,7 +57,8 @@ declare interface MobileNavProps {
 
 declare interface RightSidebarProps {
   user: Models.User | null;
-  transactions: Transaction[];
+  // transactions: Transaction[];
+  transactions: PlaidTransaction[];
   banks: Bank[] & Account[];
 }
 
@@ -142,4 +141,79 @@ declare interface createBankAccountProps {
   bankId: string;
   fundingSourceUrl: string;
   shareableId: string;
+}
+
+declare type Transaction = {
+  id: string;
+  $id: string;
+  name: string;
+  paymentChannel: string;
+  type: string;
+  accountId: string;
+  amount: number;
+  pending: boolean;
+  category: string;
+  date: string;
+  image: string;
+  type: string;
+  $createdAt: string;
+  channel: string;
+  senderBankId: string;
+  receiverBankId: string;
+};
+
+declare interface getAccountsProps {
+  userId: string;
+}
+
+declare interface getAccountProps {
+  appwriteItemId: string;
+}
+
+declare interface getInstitutionProps {
+  institutionId: string;
+}
+
+declare interface getTransactionsProps {
+  accessToken: string;
+}
+
+declare type Bank = DefaultDocument & {
+  $id: string;
+  accountId: string;
+  bankId: string;
+  accessToken: string;
+  fundingSourceUrl: string;
+  userId: string;
+  shareableId: string;
+};
+
+declare interface getBanksProps {
+  userId: string;
+}
+
+declare interface getBankProps {
+  documentId: string;
+}
+
+declare type PlaidTransaction = {
+  id: string;
+  name: string;
+  paymentChannel: string;
+  type: string;
+  accountId: string;
+  amount: number;
+  pending: boolean;
+  category: string;
+  date: string;
+  image: string | null;
+};
+
+declare type SearchParamProps = {
+  params: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+declare interface getUserInfoProps {
+  userId: string;
 }

@@ -7,8 +7,8 @@ const TotalBalanceBox = ({
   totalCurrentBalance,
 }: TotalBalanceProps) => {
   return (
-    <section className="total-balance">
-      <div className="total-balance-chart shadow-chart">
+    <section className="total-balance shadow-chart">
+      <div className="total-balance-chart">
         <DoughnutChart accounts={accounts} />
       </div>
       <div className="flex flex-col gap-6">
