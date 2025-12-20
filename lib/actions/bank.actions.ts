@@ -147,73 +147,36 @@ export const getInstitution = async ({
   }
 };
 
-// Get transactions
+// Get transactions (updated for sandbox)
 export const getTransactions = async ({
   accessToken,
 }: getTransactionsProps) => {
-  let cursor: string | null = null;
-  let hasMore = true;
-  const transactions = [];
-
   try {
-    // Iterate through each page of new transaction updates for item
-    while (hasMore) {
-      const response = await plaidClient.transactionsSync({
-        access_token: accessToken,
-        cursor: cursor || undefined,
-      });
+    const startDate = "2023-01-01";
+    const endDate = new Date().toISOString().split("T")[0];
 
-      const data = response.data;
+    const response = await plaidClient.transactionsGet({
+      access_token: accessToken,
+      start_date: startDate,
+      end_date: endDate,
+    });
 
-      transactions.push(
-        ...response.data.added.map((transaction) => ({
-          id: transaction.transaction_id,
-          name: transaction.name,
-          paymentChannel: transaction.payment_channel,
-          type: transaction.payment_channel,
-          accountId: transaction.account_id,
-          amount: transaction.amount,
-          pending: transaction.pending,
-          category: transaction.category ? transaction.category[0] : "",
-          date: transaction.date,
-          image: transaction.logo_url ?? null,
-        }))
-      );
-      cursor = data.next_cursor;
-      hasMore = data.has_more;
-    }
+    const transactions = response.data.transactions.map((t) => ({
+      id: t.transaction_id,
+      name: t.name,
+      paymentChannel: t.payment_channel,
+      type: t.payment_channel,
+      accountId: t.account_id,
+      amount: t.amount,
+      pending: t.pending,
+      category: t.category?.[0] ?? "",
+      date: t.date,
+      image: t.logo_url ?? null,
+    }));
 
     return parseStringify(transactions);
   } catch (error) {
-    console.error("An error occurred while getting the accounts:", error);
+    console.error("Error fetching transactions:", error);
+    return [];
   }
 };
-// export const getTransactions = async ({
-//   accessToken,
-// }: getTransactionsProps) => {
-//   try {
-//     const response = await plaidClient.transactionsGet({
-//       access_token: accessToken,
-//       start_date: "2023-01-01",
-//       end_date: new Date().toISOString().split("T")[0], // today
-//     });
-
-//     const transactions = response.data.transactions.map((t) => ({
-//       id: t.transaction_id,
-//       name: t.name,
-//       paymentChannel: t.payment_channel,
-//       type: t.payment_channel,
-//       accountId: t.account_id,
-//       amount: t.amount,
-//       pending: t.pending,
-//       category: t.category?.[0] ?? "",
-//       date: t.date,
-//       image: t.logo_url ?? null,
-//     }));
-
-//     return parseStringify(transactions);
-//   } catch (error) {
-//     console.error("Error fetching transactions:", error);
-//     return [];
-//   }
-// };

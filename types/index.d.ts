@@ -196,19 +196,6 @@ declare interface getBankProps {
   documentId: string;
 }
 
-declare type PlaidTransaction = {
-  id: string;
-  name: string;
-  paymentChannel: string;
-  type: string;
-  accountId: string;
-  amount: number;
-  pending: boolean;
-  category: string;
-  date: string;
-  image: string | null;
-};
-
 declare type SearchParamProps = {
   params: { [key: string]: string };
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -216,4 +203,37 @@ declare type SearchParamProps = {
 
 declare interface getUserInfoProps {
   userId: string;
+}
+
+declare interface RecentTransactionsProps {
+  accounts: Account[];
+  transactions: PlaidTransaction[];
+  appwriteItemId: string;
+  page: number;
+}
+
+declare interface BankTabItemProps {
+  account: Account;
+  appwriteItemId?: string;
+}
+
+declare interface BankInfoProps {
+  account: Account;
+  appwriteItemId?: string;
+  type: "full" | "card";
+}
+
+declare type AccountTypes =
+  | "depository"
+  | "credit"
+  | "loan "
+  | "investment"
+  | "other";
+
+declare interface TransactionTableProps {
+  transactions: PlaidTransaction[];
+}
+
+declare interface CategoryBadgeProps {
+  category: string;
 }

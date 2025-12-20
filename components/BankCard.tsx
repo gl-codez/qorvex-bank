@@ -13,7 +13,7 @@ const BankCard = ({
         <div className="bank-card_content bg-bank-gradient">
           <div>
             <h1 className="text-[16px] font-semibold text-white">
-              {account.name || userName}
+              {userName || account.name}
             </h1>
             <p className="font-black text-white">
               {formatAmount(account.currentBalance)}

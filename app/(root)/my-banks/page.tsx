@@ -1,5 +1,9 @@
 const MyBanks = () => {
-  return <div>MyBanks</div>;
+  return (
+    <section className="flex">
+      <div className="my-banks"></div>
+    </section>
+  );
 };
 
 export default MyBanks;
