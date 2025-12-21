@@ -1,12 +1,17 @@
+export const dynamic = "force-dynamic";
+
 import { HeaderBox } from "@/components/HeaderBox";
 import { RecentTransactions } from "@/components/RecentTransactions";
 import { RightSidebar } from "@/components/RightSidebar";
 import { TotalBalanceBox } from "@/components/TotalBalanceBox";
 import { getAccount, getAccounts } from "@/lib/actions/bank.actions";
 import { getLoggedInUser } from "@/lib/actions/user.action";
+import { redirect } from "next/navigation";
 
 export default async function Home({ searchParams }: SearchParamProps) {
   const loggedIn = (await getLoggedInUser()) as User | null;
+  if (!loggedIn) redirect("/sign-in");
+
   const accounts = await getAccounts({ userId: loggedIn.$id });
   const { id, page } = await searchParams;
   const currentPage = Number(page as string) || 1;

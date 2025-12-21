@@ -9,7 +9,10 @@ const BankCard = ({
 }: CreditCardProps) => {
   return (
     <div className="flex flex-col">
-      <Link href="/" className="bank-card bg-bank-gradient">
+      <Link
+        href={`/transaction-history/?id=${account.appwriteItemId}`}
+        className="bank-card bg-bank-gradient"
+      >
         <div className="bank-card_content bg-bank-gradient">
           <div>
             <h1 className="text-[16px] font-semibold text-white">
@@ -27,7 +30,7 @@ const BankCard = ({
               <h2 className="text-[12px] font-semibold text-white"> ●● / ●●</h2>
             </div>
             <p className="text-[14px] font-semibold tracking-[1.1px] text-white">
-              ●●●● ●●●●<span className="text-[16px]">1234</span>
+              ●●●● ●●●●<span className="text-[16px]">{account.mask}</span>
             </p>
           </article>
         </div>
