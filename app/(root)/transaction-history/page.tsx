@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { HeaderBox } from "@/components/HeaderBox";
+import { Pagination } from "@/components/Pagination";
 import { TransactionsTable } from "@/components/TransactionsTable";
 import { getAccount, getAccounts } from "@/lib/actions/bank.actions";
 import { getLoggedInUser } from "@/lib/actions/user.action";
@@ -22,6 +23,19 @@ const TransactionHistory = async ({ searchParams }: SearchParamProps) => {
   const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
 
   const account = await getAccount({ appwriteItemId });
+
+  if (!account) return;
+  const rowsPerPage = 10;
+  const totalPages = Math.ceil(account.transactions.length / rowsPerPage);
+  const currentPage = Number(page) || 1;
+
+  const indexOfLastTransaction = currentPage * rowsPerPage;
+  const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
+  const currentTransactions = account.transactions.slice(
+    indexOfFirstTransaction,
+    indexOfLastTransaction
+  );
+
   return (
     <section className="transactions">
       <div className="transactions-header">
@@ -46,12 +60,17 @@ const TransactionHistory = async ({ searchParams }: SearchParamProps) => {
             <div className="transactions-account-balance">
               <p className="text-sm">Current balance</p>
               <p className="text-2xl font-bold">
-                {formatAmount(account?.data.currentBalance ?? 0)}
+                {formatAmount(account.data.currentBalance ?? 0)}
               </p>
             </div>
           </div>
           <section>
-            <TransactionsTable transactions={account?.transactions ?? []} />
+            <TransactionsTable transactions={currentTransactions ?? []} />
+            {totalPages > 1 && (
+              <div className="my-4 w-full">
+                <Pagination page={currentPage} totalPages={totalPages} />
+              </div>
+            )}
           </section>
         </div>
       </div>

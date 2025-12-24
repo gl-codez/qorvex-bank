@@ -1,6 +1,7 @@
 import { formatAmount } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import Copy from "./Copy";
 
 const BankCard = ({
   account,
@@ -16,7 +17,7 @@ const BankCard = ({
         <div className="bank-card_content bg-bank-gradient">
           <div>
             <h1 className="text-[16px] font-semibold text-white">
-              {userName || account.name}
+              {account.name}
             </h1>
             <p className="font-black text-white">
               {formatAmount(account.currentBalance)}
@@ -48,9 +49,11 @@ const BankCard = ({
           width={316}
           height={190}
           alt="lines"
-          className="absolute top-2 left-48"
+          className="absolute top-2 left-48 h-auto"
+          loading="eager"
         />
       </Link>
+      {showBalance && <Copy title={account?.shareableId} />}
     </div>
   );
 };

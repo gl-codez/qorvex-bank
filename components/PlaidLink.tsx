@@ -71,15 +71,19 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
       ) : (
         <Button
           onClick={() => open()}
-          className="sidebar-link plaidlink-default"
+          className="sidebar-link relative plaidlink-default"
         >
-          <Image
-            src="/icons/connect-bank.svg"
-            height={24}
-            width={24}
-            alt="connect bank"
-          />
-          <p className="text-[16px] font-semibold text-black">Connect bank</p>
+          <div className="xl:justify-start flex justify-center items-center max-xl:w-full">
+            <Image
+              src="/icons/connect-bank.svg"
+              height={24}
+              width={24}
+              alt="connect bank"
+            />
+          </div>
+          <p className="max-xl:hidden text-[16px] font-semibold text-black">
+            Connect bank
+          </p>
         </Button>
       )}
     </>

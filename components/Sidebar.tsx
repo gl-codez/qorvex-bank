@@ -28,7 +28,7 @@ const Sidebar = ({ user }: SiderbarProps) => {
             pathname === item.route || pathname?.startsWith(`${item.route}/`);
           return (
             <Link
-              className={cn("sidebar-link", { "bg-[#37966F]": isActive })}
+              className={cn("sidebar-link", { "bg-green-700": isActive })}
               href={item.route}
               key={item.label}
             >

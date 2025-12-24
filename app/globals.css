@@ -269,11 +269,11 @@
 }
 
 .transactions-header {
-  @apply flex w-full flex-col justify-between gap-8 md:flex-row;
+  @apply flex w-full flex-col gap-8;
 }
 
 .transactions-account {
-  @apply flex flex-col justify-between gap-4 rounded-lg border-y bg-green-600 px-4 py-5 md:flex-row;
+  @apply flex flex-col justify-between gap-4 rounded-lg border-y bg-green-700 px-4 py-5 md:flex-row;
 }
 
 .transactions-account-balance {
@@ -282,4 +282,28 @@
 
 .my-banks {
   @apply flex h-screen max-h-screen w-full flex-col gap-8 bg-["#FCFCFD"] p-8 xl:py-12;
+}
+
+.payment-transfer {
+  @apply flex flex-col overflow-y-scroll bg-["#FCFCFD"] p-8 gap-3 md:max-h-screen xl:py-12;
+}
+
+.payment-transfer_form-item {
+  @apply flex w-full max-w-[850px] flex-col gap-3 py-6 md:flex-row lg:gap-8;
+}
+
+.payment-transfer_form-content {
+  @apply flex w-full max-w-[280px] flex-col gap-2;
+}
+
+.payment-transfer_form-details {
+  @apply flex flex-col gap-1 border-t border-gray-200 pb-5 pt-6;
+}
+
+.payment-transfer_btn-box {
+  @apply mt-5 flex w-full max-w-[850px] gap-3 border-gray-200 py-5;
+}
+
+.payment-transfer_btn {
+  @apply text-sm w-full bg-green-700 font-semibold text-white;
 }

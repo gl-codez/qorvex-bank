@@ -1,5 +1,3 @@
-// import { Models } from "appwrite";
-
 declare type Account = {
   id: string;
   availableBalance: number;
@@ -236,4 +234,37 @@ declare interface TransactionTableProps {
 
 declare interface CategoryBadgeProps {
   category: string;
+}
+
+declare interface PaymentTransferFormProps {
+  accounts: Account[];
+}
+
+declare interface BankDropdownProps {
+  accounts: Account[];
+  setValue?: UseFormSetValue<FieldValues>;
+  otherStyles?: string;
+}
+
+declare interface getBankByAccountIdProps {
+  accountId: string;
+}
+
+declare interface CreateTransactionProps {
+  name: string;
+  amount: string;
+  // senderId: string;
+  senderBankId?: string;
+  // receiverId: string;
+  receiverBankId?: string;
+  email: string;
+}
+
+declare interface getTransactionsByBankIdProps {
+  bankId: string;
+}
+
+declare interface PaginationProps {
+  page: number;
+  totalPages: number;
 }
